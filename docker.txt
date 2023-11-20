@@ -1,0 +1,750 @@
+
+[node1] (local) root@192.168.0.18 ~
+$ docker ps
+CONTAINER ID   IMAGE         COMMAND                  CREATED          STATUS          PORTS                 NAMES
+4044c76e055a   mysql:8.2.0   "docker-entrypoint.s…"   38 seconds ago   Up 37 seconds   3306/tcp, 33060/tcp   mysql-standalone
+[node1] (local) root@192.168.0.18 ~
+$ docker exec -it 4044 bash
+bash-4.4# mysql -u sa -p
+Enter password: 
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 8
+Server version: 8.2.0 MySQL Community Server - GPL
+
+Copyright (c) 2000, 2023, Oracle and/or its affiliates.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| performance_schema |
+| test               |
++--------------------+
+3 rows in set (0.00 sec)
+
+mysql> exit;
+Bye
+bash-4.4# exit
+exit
+[node1] (local) root@192.168.0.18 ~
+$ docker volume ls
+DRIVER    VOLUME NAME
+local     01c63bf3b0d84c56f98bd215a5f2bd6ccbdb7763ce6bd8484ee103b19832e48f
+[node1] (local) root@192.168.0.18 ~
+$ docker inspect 4044
+[
+    {
+        "Id": "4044c76e055a29f93488585dbab97e1fbb49c34b84cc30a1d332313908754975",
+        "Created": "2023-11-07T04:00:01.570535133Z",
+        "Path": "docker-entrypoint.sh",
+        "Args": [
+            "mysqld"
+        ],
+        "State": {
+            "Status": "running",
+            "Running": true,
+            "Paused": false,
+            "Restarting": false,
+            "OOMKilled": false,
+            "Dead": false,
+            "Pid": 8109,
+            "ExitCode": 0,
+            "Error": "",
+            "StartedAt": "2023-11-07T04:00:02.211660131Z",
+            "FinishedAt": "0001-01-01T00:00:00Z"
+        },
+        "Image": "sha256:a3b6608898d600759effd58768b7213bb44a6d58ab3a53495dd88e6b2042a8a4",
+        "ResolvConfPath": "/var/lib/docker/containers/4044c76e055a29f93488585dbab97e1fbb49c34b84cc30a1d332313908754975/resolv.conf",
+        "HostnamePath": "/var/lib/docker/containers/4044c76e055a29f93488585dbab97e1fbb49c34b84cc30a1d332313908754975/hostname",
+        "HostsPath": "/var/lib/docker/containers/4044c76e055a29f93488585dbab97e1fbb49c34b84cc30a1d332313908754975/hosts",
+        "LogPath": "/var/lib/docker/containers/4044c76e055a29f93488585dbab97e1fbb49c34b84cc30a1d332313908754975/4044c76e055a29f93488585dbab97e1fbb49c34b84cc30a1d332313908754975-json.log",
+        "Name": "/mysql-standalone",
+        "RestartCount": 0,
+        "Driver": "overlay2",
+        "Platform": "linux",
+        "MountLabel": "",
+        "ProcessLabel": "",
+        "AppArmorProfile": "docker-default",
+        "ExecIDs": null,
+        "HostConfig": {
+            "Binds": null,
+            "ContainerIDFile": "",
+            "LogConfig": {
+                "Type": "json-file",
+                "Config": {}
+            },
+            "NetworkMode": "default",
+            "PortBindings": {},
+            "RestartPolicy": {
+                "Name": "no",
+                "MaximumRetryCount": 0
+            },
+            "AutoRemove": false,
+            "VolumeDriver": "",
+            "VolumesFrom": null,
+            "ConsoleSize": [
+                29,
+                78
+            ],
+            "CapAdd": null,
+            "CapDrop": null,
+            "CgroupnsMode": "host",
+            "Dns": [],
+            "DnsOptions": [],
+            "DnsSearch": [],
+            "ExtraHosts": null,
+            "GroupAdd": null,
+            "IpcMode": "private",
+            "Cgroup": "",
+            "Links": null,
+            "OomScoreAdj": 0,
+            "PidMode": "",
+            "Privileged": false,
+            "PublishAllPorts": false,
+            "ReadonlyRootfs": false,
+            "SecurityOpt": null,
+            "UTSMode": "",
+            "UsernsMode": "",
+            "ShmSize": 67108864,
+            "Runtime": "runc",
+            "Isolation": "",
+            "CpuShares": 0,
+            "Memory": 0,
+            "NanoCpus": 0,
+            "CgroupParent": "",
+            "BlkioWeight": 0,
+            "BlkioWeightDevice": [],
+            "BlkioDeviceReadBps": [],
+            "BlkioDeviceWriteBps": [],
+            "BlkioDeviceReadIOps": [],
+            "BlkioDeviceWriteIOps": [],
+            "CpuPeriod": 0,
+            "CpuQuota": 0,
+            "CpuRealtimePeriod": 0,
+            "CpuRealtimeRuntime": 0,
+            "CpusetCpus": "",
+            "CpusetMems": "",
+            "Devices": [],
+            "DeviceCgroupRules": null,
+            "DeviceRequests": null,
+            "MemoryReservation": 0,
+            "MemorySwap": 0,
+            "MemorySwappiness": null,
+            "OomKillDisable": false,
+            "PidsLimit": null,
+            "Ulimits": null,
+            "CpuCount": 0,
+            "CpuPercent": 0,
+            "IOMaximumIOps": 0,
+            "IOMaximumBandwidth": 0,
+            "MaskedPaths": [
+                "/proc/asound",
+                "/proc/acpi",
+                "/proc/kcore",
+                "/proc/keys",
+                "/proc/latency_stats",
+                "/proc/timer_list",
+                "/proc/timer_stats",
+                "/proc/sched_debug",
+                "/proc/scsi",
+                "/sys/firmware",
+                "/sys/devices/virtual/powercap"
+            ],
+            "ReadonlyPaths": [
+                "/proc/bus",
+                "/proc/fs",
+                "/proc/irq",
+                "/proc/sys",
+                "/proc/sysrq-trigger"
+            ]
+        },
+        "GraphDriver": {
+            "Data": {
+                "LowerDir": "/var/lib/docker/overlay2/cfdebb7d3949fa85b84d0830409690230a22b390c5b26add0bc23490b62aae98-init/diff:/var/lib/docker/overlay2/f0cda9a43152ef009dc533be0be277ab4e152c7792abf947245702deb63efb00/diff:/var/lib/docker/overlay2/ab3c64bb1295a816b5775d64f1ecc8b9bd07863e0aaa2a045e1a73f8df29c270/diff:/var/lib/docker/overlay2/2c954eecdba7de2c73009491d82800934a7158b0a2bce906fadb767a0f270a61/diff:/var/lib/docker/overlay2/9dd078ed314356b5013c7d92b4b6ea357c1614e710e0463e600d7fc7e87c6f57/diff:/var/lib/docker/overlay2/357211be44aa14f430dbc2c6671288377d31bca57fcc22f033cee5f241833b62/diff:/var/lib/docker/overlay2/552ad31a1f12ec22665ce00f4ffc3aa9e9f86d0e2ec7480c539ae440c52ce9dd/diff:/var/lib/docker/overlay2/fbc4185ce0c7e10b79e69d77e28ed2b2974c0bf7b4ba2a0e6cb0b9d3b1cf62be/diff:/var/lib/docker/overlay2/7e60d626439f691a320abbb81ff880f64cdc45a9a6cc6d05dc9fd4f61a2cb9a8/diff:/var/lib/docker/overlay2/df96ef3bded14e0e801e26290cdf04e84c011e4442fd769786364fc4bbb7ba03/diff:/var/lib/docker/overlay2/8a6b8e9c6fec643e175a79d677062a1730ca09ae2957b2424e5a12308a2382c9/diff",
+                "MergedDir": "/var/lib/docker/overlay2/cfdebb7d3949fa85b84d0830409690230a22b390c5b26add0bc23490b62aae98/merged",
+                "UpperDir": "/var/lib/docker/overlay2/cfdebb7d3949fa85b84d0830409690230a22b390c5b26add0bc23490b62aae98/diff",
+                "WorkDir": "/var/lib/docker/overlay2/cfdebb7d3949fa85b84d0830409690230a22b390c5b26add0bc23490b62aae98/work"
+            },
+            "Name": "overlay2"
+        },
+        "Mounts": [
+            {
+                "Type": "volume",
+                "Name": "01c63bf3b0d84c56f98bd215a5f2bd6ccbdb7763ce6bd8484ee103b19832e48f",
+                "Source": "/var/lib/docker/volumes/01c63bf3b0d84c56f98bd215a5f2bd6ccbdb7763ce6bd8484ee103b19832e48f/_data",
+                "Destination": "/var/lib/mysql",
+                "Driver": "local",
+                "Mode": "",
+                "RW": true,
+                "Propagation": ""
+            }
+        ],
+        "Config": {
+            "Hostname": "4044c76e055a",
+            "Domainname": "",
+            "User": "",
+            "AttachStdin": false,
+            "AttachStdout": false,
+            "AttachStderr": false,
+            "ExposedPorts": {
+                "3306/tcp": {},
+                "33060/tcp": {}
+            },
+            "Tty": false,
+            "OpenStdin": false,
+            "StdinOnce": false,
+            "Env": [
+                "MYSQL_USER=sa",
+                "MYSQL_PASSWORD=password",
+                "MYSQL_ROOT_PASSWORD=password",
+                "MYSQL_DATABASE=test",
+                "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+                "GOSU_VERSION=1.16",
+                "MYSQL_MAJOR=innovation",
+                "MYSQL_VERSION=8.2.0-1.el8",
+                "MYSQL_SHELL_VERSION=8.0.35-1.el8"
+            ],
+            "Cmd": [
+                "mysqld"
+            ],
+            "Image": "mysql:8.2.0",
+            "Volumes": {
+                "/var/lib/mysql": {}
+            },
+            "WorkingDir": "",
+            "Entrypoint": [
+                "docker-entrypoint.sh"
+            ],
+            "OnBuild": null,
+            "Labels": {}
+        },
+        "NetworkSettings": {
+            "Bridge": "",
+            "SandboxID": "9b82d10061778f11c03599ceea799e7b259b65b57643948434bfbd4c6b718e09",
+            "HairpinMode": false,
+            "LinkLocalIPv6Address": "",
+            "LinkLocalIPv6PrefixLen": 0,
+            "Ports": {
+                "3306/tcp": null,
+                "33060/tcp": null
+            },
+            "SandboxKey": "/var/run/docker/netns/9b82d1006177",
+            "SecondaryIPAddresses": null,
+            "SecondaryIPv6Addresses": null,
+            "EndpointID": "188791c86d803dadd3731d03f6c010d087aaea7666c7f8ac1ebd58dca0c860e0",
+            "Gateway": "172.17.0.1",
+            "GlobalIPv6Address": "",
+            "GlobalIPv6PrefixLen": 0,
+            "IPAddress": "172.17.0.2",
+            "IPPrefixLen": 16,
+            "IPv6Gateway": "",
+            "MacAddress": "02:42:ac:11:00:02",
+            "Networks": {
+                "bridge": {
+                    "IPAMConfig": null,
+                    "Links": null,
+                    "Aliases": null,
+                    "NetworkID": "77a425ec161db6b9d46f845c62fd15eaff1c07a52fdb5d5a6617f553d865ddfd",
+                    "EndpointID": "188791c86d803dadd3731d03f6c010d087aaea7666c7f8ac1ebd58dca0c860e0",
+                    "Gateway": "172.17.0.1",
+                    "IPAddress": "172.17.0.2",
+                    "IPPrefixLen": 16,
+                    "IPv6Gateway": "",
+                    "GlobalIPv6Address": "",
+                    "GlobalIPv6PrefixLen": 0,
+                    "MacAddress": "02:42:ac:11:00:02",
+                    "DriverOpts": null
+                }
+            }
+        }
+    }
+]
+[node1] (local) root@192.168.0.18 ~
+$ docker images
+REPOSITORY   TAG       IMAGE ID       CREATED         SIZE
+mysql        8.2.0     a3b6608898d6   13 days ago     596MB
+openjdk      8         b273004037cc   15 months ago   526MB
+[node1] (local) root@192.168.0.18 ~
+$ history
+    1  docker pull mysql:5.6
+    2  docker images
+    3  docker rmi dd3b --force
+    4  docker pull mysql:8.2.0
+    5  docker pull openjdk:8
+    6  docker images
+    7  docker run --name mysql-standalone -e MYSQL_ROOT_PASSWORD=password -e MYSQL_DATABASE=test MYSQL_USER=sa -e MYSQL_PASSWORD=password -d mysql:8.2.0
+    8  docker run --name mysql-standalone -e MYSQL_ROOT_PASSWORD=password -e MYSQL_DATABASE=test -e MYSQL_USER=sa -e MYSQL_PASSWORD=password -d mysql:8.2.0
+    9  docker ps
+   10  docker logs 4044
+   11  docker ps
+   12  docker exec -it 4044 bash
+   13  docker volume ls
+   14  docker inspect 4044
+   15  docker images
+   16  history
+[node1] (local) root@192.168.0.18 ~
+$ git clone https://github.com/Kushalsri777/docker_springapp.git
+Cloning into 'docker_springapp'...
+remote: Enumerating objects: 9, done.
+remote: Counting objects: 100% (9/9), done.
+remote: Compressing objects: 100% (7/7), done.
+remote: Total 9 (delta 2), reused 3 (delta 0), pack-reused 0
+Receiving objects: 100% (9/9), 38.08 MiB | 22.59 MiB/s, done.
+Resolving deltas: 100% (2/2), done.
+[node1] (local) root@192.168.0.18 ~
+$ ls
+docker_springapp
+[node1] (local) root@192.168.0.18 ~
+$ cd docker_springapp
+[node1] (local) root@192.168.0.18 ~/docker_springapp
+$ ls
+README.md                  spring-mvc-orm-docker.jar
+spring-mvc-app.jar
+[node1] (local) root@192.168.0.18 ~/docker_springapp
+$ vi Dockerfile
+[node1] (local) root@192.168.0.18 ~/docker_springapp
+$ docker build -t users-mysql .
+[+] Building 1.3s (7/7) FINISHED                               docker:default
+ => [internal] load build definition from Dockerfile                     0.0s
+ => => transferring dockerfile: 178B                                     0.0s
+ => [internal] load .dockerignore                                        0.0s
+ => => transferring context: 2B                                          0.0s
+ => [internal] load metadata for docker.io/library/openjdk:8             0.0s
+ => [internal] load build context                                        0.6s
+ => => transferring context: 44.35MB                                     0.6s
+ => [1/2] FROM docker.io/library/openjdk:8                               0.1s
+ => [2/2] ADD spring-mvc-orm-docker.jar spring-mvc-orm-docker.jar        0.1s
+ => exporting to image                                                   0.4s
+ => => exporting layers                                                  0.4s
+ => => writing image sha256:38be82a5490b338b9ec22c20edd346b0952d29d3bed  0.0s
+ => => naming to docker.io/library/users-mysql                           0.0s
+[node1] (local) root@192.168.0.18 ~/docker_springapp
+$ docker ps
+CONTAINER ID   IMAGE         COMMAND                  CREATED          STATUS          PORTS                 NAMES
+4044c76e055a   mysql:8.2.0   "docker-entrypoint.s…"   56 minutes ago   Up 56 minutes   3306/tcp, 33060/tcp   mysql-standalone
+[node1] (local) root@192.168.0.18 ~/docker_springapp
+$ docker images
+REPOSITORY    TAG       IMAGE ID       CREATED          SIZE
+users-mysql   latest    38be82a5490b   14 minutes ago   570MB
+mysql         8.2.0     a3b6608898d6   13 days ago      596MB
+openjdk       8         b273004037cc   15 months ago    526MB
+[node1] (local) root@192.168.0.18 ~/docker_springapp
+$ docker rmi 38be
+Untagged: users-mysql:latest
+Deleted: sha256:38be82a5490b338b9ec22c20edd346b0952d29d3bedafdd25e15a7ac5b38ecfa
+[node1] (local) root@192.168.0.18 ~/docker_springapp
+$ docker images
+REPOSITORY   TAG       IMAGE ID       CREATED         SIZE
+mysql        8.2.0     a3b6608898d6   13 days ago     596MB
+openjdk      8         b273004037cc   15 months ago   526MB
+[node1] (local) root@192.168.0.18 ~/docker_springapp
+$ docker ps -a
+CONTAINER ID   IMAGE         COMMAND                  CREATED          STATUS          PORTS                 NAMES
+4044c76e055a   mysql:8.2.0   "docker-entrypoint.s…"   58 minutes ago   Up 58 minutes   3306/tcp, 33060/tcp   mysql-standalone
+[node1] (local) root@192.168.0.18 ~/docker_springapp
+$ git pull
+remote: Enumerating objects: 3, done.
+remote: Total 3 (delta 0), reused 0 (delta 0), pack-reused 3
+Unpacking objects: 100% (3/3), 40.30 MiB | 9.79 MiB/s, done.
+From https://github.com/Kushalsri777/docker_springapp
+   b8cbbee..cc86c33  master     -> origin/master
+Updating b8cbbee..cc86c33
+Fast-forward
+ spring-mvc-orm-docker.jar | Bin 44341381 -> 46823262 bytes
+ 1 file changed, 0 insertions(+), 0 deletions(-)
+[node1] (local) root@192.168.0.18 ~/docker_springapp
+$ ls
+Dockerfile                 spring-mvc-app.jar
+README.md                  spring-mvc-orm-docker.jar
+[node1] (local) root@192.168.0.18 ~/docker_springapp
+$ vi Dockerfile
+[node1] (local) root@192.168.0.18 ~/docker_springapp
+$ docker build -t users-mysql .
+[+] Building 1.8s (7/7) FINISHED                               docker:default
+ => [internal] load build definition from Dockerfile                     0.0s
+ => => transferring dockerfile: 178B                                     0.0s
+ => [internal] load .dockerignore                                        0.0s
+ => => transferring context: 2B                                          0.0s
+ => [internal] load metadata for docker.io/library/openjdk:8             0.0s
+ => [internal] load build context                                        1.0s
+ => => transferring context: 46.83MB                                     1.0s
+ => CACHED [1/2] FROM docker.io/library/openjdk:8                        0.0s
+ => [2/2] ADD spring-mvc-orm-docker.jar spring-mvc-orm-docker.jar        0.2s
+ => exporting to image                                                   0.5s
+ => => exporting layers                                                  0.5s
+ => => writing image sha256:5dfad03d040d975149cc2d6d9ed68b6b60ea8d8aa26  0.0s
+ => => naming to docker.io/library/users-mysql                           0.0s
+[node1] (local) root@192.168.0.18 ~/docker_springapp
+$ docker images
+REPOSITORY    TAG       IMAGE ID       CREATED         SIZE
+users-mysql   latest    5dfad03d040d   5 seconds ago   573MB
+mysql         8.2.0     a3b6608898d6   13 days ago     596MB
+openjdk       8         b273004037cc   15 months ago   526MB
+[node1] (local) root@192.168.0.18 ~/docker_springapp
+$ docker run -p 8090:8090 --name mysql-docker-app --link mysql-standalone:mysql -d users-sql
+Unable to find image 'users-sql:latest' locally
+docker: Error response from daemon: pull access denied for users-sql, repository does not exist or may require 'docker login': denied: requested access to the resource is denied.
+See 'docker run --help'.
+[node1] (local) root@192.168.0.18 ~/docker_springapp
+$ docker images
+REPOSITORY    TAG       IMAGE ID       CREATED         SIZE
+users-mysql   latest    5dfad03d040d   6 minutes ago   573MB
+mysql         8.2.0     a3b6608898d6   13 days ago     596MB
+openjdk       8         b273004037cc   15 months ago   526MB
+[node1] (local) root@192.168.0.18 ~/docker_springapp
+$ docker run -p 8090:8090 --name mysql-docker-app --link mysql-standalone:mysql -d users-mysql
+51f01b6480eabf3979a865f1243fb6b3dad36be2c8d699cfd13be1df406e1215
+[node1] (local) root@192.168.0.18 ~/docker_springapp
+$ docker ps
+CONTAINER ID   IMAGE         COMMAND                  CREATED             STATUS             PORTS                    NAMES
+51f01b6480ea   users-mysql   "java -jar spring-mv…"   18 seconds ago      Up 17 seconds      0.0.0.0:8090->8090/tcp   mysql-docker-app
+4044c76e055a   mysql:8.2.0   "docker-entrypoint.s…"   About an hour ago   Up About an hour   3306/tcp, 33060/tcp      mysql-standalone
+[node1] (local) root@192.168.0.18 ~/docker_springapp
+$ docker ps -a
+CONTAINER ID   IMAGE         COMMAND                  CREATED             STATUS             PORTS                    NAMES
+51f01b6480ea   users-mysql   "java -jar spring-mv…"   35 seconds ago      Up 34 seconds      0.0.0.0:8090->8090/tcp   mysql-docker-app
+4044c76e055a   mysql:8.2.0   "docker-entrypoint.s…"   About an hour ago   Up About an hour   3306/tcp, 33060/tcp      mysql-standalone
+[node1] (local) root@192.168.0.18 ~/docker_springapp
+$ docker logs 51f0
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+ :: Spring Boot ::               (v2.7.16)
+
+2023-11-07 05:07:52.968  INFO 1 --- [           main] com.controller.SpringMvcApplication      : Starting SpringMvcApplication v0.0.1-SNAPSHOT using Java 1.8.0_342 on 51f01b6480ea with PID 1 (/spring-mvc-orm-docker.jar started by root in /)
+2023-11-07 05:07:52.976  INFO 1 --- [           main] com.controller.SpringMvcApplication      : No active profile set, falling back to 1 default profile: "default"
+2023-11-07 05:07:57.193  INFO 1 --- [           main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2023-11-07 05:07:57.311  INFO 1 --- [           main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 96 ms. Found 1 JPA repository interfaces.
+2023-11-07 05:08:00.139  INFO 1 --- [           main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8090 (http)
+2023-11-07 05:08:00.179  INFO 1 --- [           main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2023-11-07 05:08:00.180  INFO 1 --- [           main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.80]
+2023-11-07 05:08:00.484  INFO 1 --- [           main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2023-11-07 05:08:00.484  INFO 1 --- [           main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 7216 ms
+Loading class `com.mysql.jdbc.Driver'. This is deprecated. The new driver class is `com.mysql.cj.jdbc.Driver'. The driver is automatically registered via the SPI and manual loading of the driver class is generally unnecessary.
+2023-11-07 05:08:01.306  INFO 1 --- [           main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2023-11-07 05:08:01.445  INFO 1 --- [           main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 5.6.15.Final
+2023-11-07 05:08:02.354  INFO 1 --- [           main] o.hibernate.annotations.common.Version   : HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+2023-11-07 05:08:02.772  INFO 1 --- [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2023-11-07 05:08:02.782  WARN 1 --- [           main] com.zaxxer.hikari.util.DriverDataSource  : Registered driver with driverClassName=com.mysql.jdbc.Driver was not found, trying direct instantiation.
+2023-11-07 05:08:03.768  INFO 1 --- [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2023-11-07 05:08:03.873  INFO 1 --- [           main] org.hibernate.dialect.Dialect            : HHH000400: Using dialect: org.hibernate.dialect.MySQL8Dialect
+2023-11-07 05:08:06.417  INFO 1 --- [           main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2023-11-07 05:08:06.445  INFO 1 --- [           main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2023-11-07 05:08:08.560  WARN 1 --- [           main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2023-11-07 05:08:08.801 DEBUG 1 --- [           main] s.w.s.m.m.a.RequestMappingHandlerMapping : 13 mappings in 'requestMappingHandlerMapping'
+2023-11-07 05:08:09.009  INFO 1 --- [           main] pertySourcedRequestMappingHandlerMapping : Mapped URL path [/v2/api-docs] onto method [springfox.documentation.swagger2.web.Swagger2Controller#getDocumentation(String, HttpServletRequest)]
+2023-11-07 05:08:10.042 DEBUG 1 --- [           main] s.w.s.m.m.a.RequestMappingHandlerAdapter : ControllerAdvice beans: 0 @ModelAttribute, 0 @InitBinder, 1 RequestBodyAdvice, 1 ResponseBodyAdvice
+2023-11-07 05:08:10.499 DEBUG 1 --- [           main] o.s.w.s.handler.SimpleUrlHandlerMapping  : Patterns [/webjars/**, /**] in 'resourceHandlerMapping'
+2023-11-07 05:08:10.542 DEBUG 1 --- [           main] .m.m.a.ExceptionHandlerExceptionResolver : ControllerAdvice beans: 1 @ExceptionHandler, 1 ResponseBodyAdvice
+2023-11-07 05:08:10.951  INFO 1 --- [           main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8090 (http) with context path ''
+2023-11-07 05:08:10.954  INFO 1 --- [           main] d.s.w.p.DocumentationPluginsBootstrapper : Context refreshed
+2023-11-07 05:08:11.034  INFO 1 --- [           main] d.s.w.p.DocumentationPluginsBootstrapper : Found 1 custom documentation plugin(s)
+2023-11-07 05:08:11.134  INFO 1 --- [           main] s.d.s.w.s.ApiListingReferenceScanner     : Scanning for api listing references
+2023-11-07 05:08:11.639  INFO 1 --- [           main] com.controller.SpringMvcApplication      : Started SpringMvcApplication in 20.152 seconds (JVM running for 21.827)
+[node1] (local) root@192.168.0.18 ~/docker_springapp
+$ vi Dockerfile
+[node1] (local) root@192.168.0.18 ~/docker_springapp
+$ docker exec -it 4044 bash
+bash-4.4# mysql -u sa -p
+Enter password: 
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 19
+Server version: 8.2.0 MySQL Community Server - GPL
+
+Copyright (c) 2000, 2023, Oracle and/or its affiliates.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| performance_schema |
+| test               |
++--------------------+
+3 rows in set (0.01 sec)
+
+mysql> select * from test;
+ERROR 1046 (3D000): No database selected
+mysql> use test;
+Reading table information for completion of table and column names
+You can turn off this feature to get a quicker startup with -A
+
+Database changed
+mysql> show tables;
++--------------------+
+| Tables_in_test     |
++--------------------+
+| address            |
+| hibernate_sequence |
+| user               |
++--------------------+
+3 rows in set (0.01 sec)
+
+mysql> select * from user;
++-----+-------+------------+----------+-------+----------------+
+| uid | city  | email      | password | uname | address_add_id |
++-----+-------+------------+----------+-------+----------------+
+|   1 | patna | aa@aaa.com | anmol    | anmol |            101 |
++-----+-------+------------+----------+-------+----------------+
+1 row in set (0.00 sec)
+
+mysql> select * from address;
++--------+------+-------------+
+| add_id | city | street_name |
++--------+------+-------------+
+|    101 | GKP  | Suryanagar  |
++--------+------+-------------+
+1 row in set (0.00 sec)
+
+mysql> exit;
+Bye
+bash-4.4# exit
+exit
+[node1] (local) root@192.168.0.18 ~/docker_springapp
+$ docker exec -it 4044 bash
+bash-4.4# mysql -u sa -p
+Enter password: 
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 50
+Server version: 8.2.0 MySQL Community Server - GPL
+
+Copyright (c) 2000, 2023, Oracle and/or its affiliates.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| performance_schema |
+| test               |
++--------------------+
+3 rows in set (0.01 sec)
+
+mysql> use test;
+Reading table information for completion of table and column names
+You can turn off this feature to get a quicker startup with -A
+
+Database changed
+mysql> show tables;
++--------------------+
+| Tables_in_test     |
++--------------------+
+| address            |
+| hibernate_sequence |
+| user               |
++--------------------+
+3 rows in set (0.00 sec)
+
+mysql> create table Employee
+    -> (
+    -> emp_id int,
+    -> emp_name varchar(30),
+    -> emp_city varchar(20));
+Query OK, 0 rows affected (0.03 sec)
+
+mysql> creat table insurance(
+    -> emp_id int foreign key,
+    -> ins_type^C
+mysql> create table project(
+    -> emp_id int,
+    -> proj_id int,
+    -> proj_name varchar(30),
+    -> loaction varchar(30));
+Query OK, 0 rows affected (0.05 sec)
+
+mysql> show tables;
++--------------------+
+| Tables_in_test     |
++--------------------+
+| Employee           |
+| address            |
+| hibernate_sequence |
+| project            |
+| user               |
++--------------------+
+5 rows in set (0.00 sec)
+
+mysql> create table insurance(
+    -> emp_id int,
+    -> ins_type varchar(20),
+    -> cvrg_amt int);
+Query OK, 0 rows affected (0.02 sec)
+
+mysql> show tables;
++--------------------+
+| Tables_in_test     |
++--------------------+
+| Employee           |
+| address            |
+| hibernate_sequence |
+| insurance          |
+| project            |
+| user               |
++--------------------+
+6 rows in set (0.00 sec)
+
+mysql> exit;
+Bye
+bash-4.4# exit
+exit
+[node1] (local) root@192.168.0.18 ~/docker_springapp
+$ git pull
+remote: Enumerating objects: 3, done.
+remote: Counting objects: 100% (3/3), done.
+remote: Compressing objects: 100% (2/2), done.
+remote: Total 3 (delta 1), reused 3 (delta 1), pack-reused 0
+Unpacking objects: 100% (3/3), 19.63 MiB | 8.14 MiB/s, done.
+From https://github.com/Kushalsri777/docker_springapp
+   cc86c33..005fd31  master     -> origin/master
+Updating cc86c33..005fd31
+Fast-forward
+ spring-jdbc-app.jar | Bin 0 -> 22785830 bytes
+ 1 file changed, 0 insertions(+), 0 deletions(-)
+ create mode 100644 spring-jdbc-app.jar
+[node1] (local) root@192.168.0.18 ~/docker_springapp
+$ ls
+Dockerfile                 spring-mvc-app.jar
+README.md                  spring-mvc-orm-docker.jar
+spring-jdbc-app.jar
+[node1] (local) root@192.168.0.18 ~/docker_springapp
+$ vi Dockerfile
+[node1] (local) root@192.168.0.18 ~/docker_springapp
+$ vi Dockerfile
+[node1] (local) root@192.168.0.18 ~/docker_springapp
+$ docker build -t jdbc-spring .
+[+] Building 1.4s (7/7) FINISHED                               docker:default
+ => [internal] load .dockerignore                                        0.0s
+ => => transferring context: 2B                                          0.0s
+ => [internal] load build definition from Dockerfile                     0.0s
+ => => transferring dockerfile: 158B                                     0.0s
+ => [internal] load metadata for docker.io/library/openjdk:8             0.0s
+ => [internal] load build context                                        0.8s
+ => => transferring context: 22.79MB                                     0.8s
+ => CACHED [1/2] FROM docker.io/library/openjdk:8                        0.0s
+ => [2/2] ADD spring-jdbc-app.jar spring-jdbc-app.jar                    0.1s
+ => exporting to image                                                   0.4s
+ => => exporting layers                                                  0.4s
+ => => writing image sha256:2cc87eae527a54e427b5fef9c98e995e2466abba0df  0.0s
+ => => naming to docker.io/library/jdbc-spring                           0.0s
+[node1] (local) root@192.168.0.18 ~/docker_springapp
+$ docker run -p 8080:8080 --name spring-jdbc-app --link mysql-standalone:mysql -d jdbc-spring
+ba3b6b8ad6fc17cc95dfb80902a62b62bc52618a453927733127271e7885a1d1
+[node1] (local) root@192.168.0.18 ~/docker_springapp
+$ docker ps -a
+CONTAINER ID   IMAGE         COMMAND                  CREATED          STATUS          PORTS                    NAMES
+ba3b6b8ad6fc   jdbc-spring   "java -jar spring-jd…"   11 seconds ago   Up 10 seconds   0.0.0.0:8080->8080/tcp   spring-jdbc-app
+51f01b6480ea   users-mysql   "java -jar spring-mv…"   2 hours ago      Up 2 hours      0.0.0.0:8090->8090/tcp   mysql-docker-app
+4044c76e055a   mysql:8.2.0   "docker-entrypoint.s…"   3 hours ago      Up 3 hours      3306/tcp, 33060/tcp      mysql-standalone
+[node1] (local) root@192.168.0.18 ~/docker_springapp
+$ docker logs ba3b
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+ :: Spring Boot ::               (v2.7.16)
+
+2023-11-07 07:27:58.695  INFO 1 --- [           main] c.e.springcore.SpringCoreApplication     : Starting SpringCoreApplication v0.0.1-SNAPSHOT using Java 1.8.0_342 on ba3b6b8ad6fc with PID 1 (/spring-jdbc-app.jar started by root in /)
+2023-11-07 07:27:58.709  INFO 1 --- [           main] c.e.springcore.SpringCoreApplication     : No active profile set, falling back to 1 default profile: "default"
+2023-11-07 07:28:05.964  INFO 1 --- [           main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
+2023-11-07 07:28:06.054  INFO 1 --- [           main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2023-11-07 07:28:06.055  INFO 1 --- [           main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.80]
+2023-11-07 07:28:06.466  INFO 1 --- [           main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2023-11-07 07:28:06.466  INFO 1 --- [           main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 7333 ms
+2023-11-07 07:28:07.001  WARN 1 --- [           main] ConfigServletWebServerApplicationContext : Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'employeeDaoImpl': Unsatisfied dependency expressed through field 'dataSource'; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'dataSource' defined in class path resource [org/springframework/boot/autoconfigure/jdbc/DataSourceConfiguration$Hikari.class]: Bean instantiation via factory method failed; nested exception is org.springframework.beans.BeanInstantiationException: Failed to instantiate [com.zaxxer.hikari.HikariDataSource]: Factory method 'dataSource' threw exception; nested exception is java.lang.IllegalStateException: Cannot load driver class: com.mysql.jdbc.Driver
+2023-11-07 07:28:07.025  INFO 1 --- [           main] o.apache.catalina.core.StandardService   : Stopping service [Tomcat]
+2023-11-07 07:28:07.115  INFO 1 --- [           main] ConditionEvaluationReportLoggingListener : 
+
+Error starting ApplicationContext. To display the conditions report re-run your application with 'debug' enabled.
+2023-11-07 07:28:07.207 ERROR 1 --- [           main] o.s.boot.SpringApplication               : Application run failed
+
+org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'employeeDaoImpl': Unsatisfied dependency expressed through field 'dataSource'; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'dataSource' defined in class path resource [org/springframework/boot/autoconfigure/jdbc/DataSourceConfiguration$Hikari.class]: Bean instantiation via factory method failed; nested exception is org.springframework.beans.BeanInstantiationException: Failed to instantiate [com.zaxxer.hikari.HikariDataSource]: Factory method 'dataSource' threw exception; nested exception is java.lang.IllegalStateException: Cannot load driver class: com.mysql.jdbc.Driver
+        at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredFieldElement.resolveFieldValue(AutowiredAnnotationBeanPostProcessor.java:713) ~[spring-beans-5.3.30.jar!/:5.3.30]
+        at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredFieldElement.inject(AutowiredAnnotationBeanPostProcessor.java:693) ~[spring-beans-5.3.30.jar!/:5.3.30]
+        at org.springframework.beans.factory.annotation.InjectionMetadata.inject(InjectionMetadata.java:119) ~[spring-beans-5.3.30.jar!/:5.3.30]
+        at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor.postProcessProperties(AutowiredAnnotationBeanPostProcessor.java:408) ~[spring-beans-5.3.30.jar!/:5.3.30]
+        at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.populateBean(AbstractAutowireCapableBeanFactory.java:1431) ~[spring-beans-5.3.30.jar!/:5.3.30]
+        at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:619) ~[spring-beans-5.3.30.jar!/:5.3.30]
+        at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:542) ~[spring-beans-5.3.30.jar!/:5.3.30]
+        at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:335) ~[spring-beans-5.3.30.jar!/:5.3.30]
+        at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:234) ~[spring-beans-5.3.30.jar!/:5.3.30]
+        at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:333) ~[spring-beans-5.3.30.jar!/:5.3.30]
+        at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:208) ~[spring-beans-5.3.30.jar!/:5.3.30]
+        at org.springframework.beans.factory.support.DefaultListableBeanFactory.preInstantiateSingletons(DefaultListableBeanFactory.java:955) ~[spring-beans-5.3.30.jar!/:5.3.30]
+        at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:921) ~[spring-context-5.3.30.jar!/:5.3.30]
+        at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:583) ~[spring-context-5.3.30.jar!/:5.3.30]
+        at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:147) ~[spring-boot-2.7.16.jar!/:2.7.16]
+        at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:731) [spring-boot-2.7.16.jar!/:2.7.16]
+        at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:408) [spring-boot-2.7.16.jar!/:2.7.16]
+        at org.springframework.boot.SpringApplication.run(SpringApplication.java:307) [spring-boot-2.7.16.jar!/:2.7.16]
+        at org.springframework.boot.SpringApplication.run(SpringApplication.java:1303) [spring-boot-2.7.16.jar!/:2.7.16]
+        at org.springframework.boot.SpringApplication.run(SpringApplication.java:1292) [spring-boot-2.7.16.jar!/:2.7.16]
+        at com.example.springcore.SpringCoreApplication.main(SpringCoreApplication.java:20) [classes!/:0.0.1-SNAPSHOT]
+        at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[na:1.8.0_342]
+        at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62) ~[na:1.8.0_342]
+        at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[na:1.8.0_342]
+        at java.lang.reflect.Method.invoke(Method.java:498) ~[na:1.8.0_342]
+        at org.springframework.boot.loader.MainMethodRunner.run(MainMethodRunner.java:49) [spring-jdbc-app.jar:0.0.1-SNAPSHOT]
+        at org.springframework.boot.loader.Launcher.launch(Launcher.java:108) [spring-jdbc-app.jar:0.0.1-SNAPSHOT]
+        at org.springframework.boot.loader.Launcher.launch(Launcher.java:58) [spring-jdbc-app.jar:0.0.1-SNAPSHOT]
+        at org.springframework.boot.loader.JarLauncher.main(JarLauncher.java:65) [spring-jdbc-app.jar:0.0.1-SNAPSHOT]
+Caused by: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'dataSource' defined in class path resource [org/springframework/boot/autoconfigure/jdbc/DataSourceConfiguration$Hikari.class]: Bean instantiation via factory method failed; nested exception is org.springframework.beans.BeanInstantiationException: Failed to instantiate [com.zaxxer.hikari.HikariDataSource]: Factory method 'dataSource' threw exception; nested exception is java.lang.IllegalStateException: Cannot load driver class: com.mysql.jdbc.Driver
+        at org.springframework.beans.factory.support.ConstructorResolver.instantiate(ConstructorResolver.java:653) ~[spring-beans-5.3.30.jar!/:5.3.30]
+        at org.springframework.beans.factory.support.ConstructorResolver.instantiateUsingFactoryMethod(ConstructorResolver.java:633) ~[spring-beans-5.3.30.jar!/:5.3.30]
+        at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.instantiateUsingFactoryMethod(AbstractAutowireCapableBeanFactory.java:1352) ~[spring-beans-5.3.30.jar!/:5.3.30]
+        at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBeanInstance(AbstractAutowireCapableBeanFactory.java:1195) ~[spring-beans-5.3.30.jar!/:5.3.30]
+        at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:582) ~[spring-beans-5.3.30.jar!/:5.3.30]
+        at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:542) ~[spring-beans-5.3.30.jar!/:5.3.30]
+        at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:335) ~[spring-beans-5.3.30.jar!/:5.3.30]
+        at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:234) ~[spring-beans-5.3.30.jar!/:5.3.30]
+        at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:333) ~[spring-beans-5.3.30.jar!/:5.3.30]
+        at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:208) ~[spring-beans-5.3.30.jar!/:5.3.30]
+        at org.springframework.beans.factory.config.DependencyDescriptor.resolveCandidate(DependencyDescriptor.java:276) ~[spring-beans-5.3.30.jar!/:5.3.30]
+        at org.springframework.beans.factory.support.DefaultListableBeanFactory.doResolveDependency(DefaultListableBeanFactory.java:1391) ~[spring-beans-5.3.30.jar!/:5.3.30]
+        at org.springframework.beans.factory.support.DefaultListableBeanFactory.resolveDependency(DefaultListableBeanFactory.java:1311) ~[spring-beans-5.3.30.jar!/:5.3.30]
+        at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredFieldElement.resolveFieldValue(AutowiredAnnotationBeanPostProcessor.java:710) ~[spring-beans-5.3.30.jar!/:5.3.30]
+        ... 28 common frames omitted
+Caused by: org.springframework.beans.BeanInstantiationException: Failed to instantiate [com.zaxxer.hikari.HikariDataSource]: Factory method 'dataSource' threw exception; nested exception is java.lang.IllegalStateException: Cannot load driver class: com.mysql.jdbc.Driver
+        at org.springframework.beans.factory.support.SimpleInstantiationStrategy.instantiate(SimpleInstantiationStrategy.java:185) ~[spring-beans-5.3.30.jar!/:5.3.30]
+        at org.springframework.beans.factory.support.ConstructorResolver.instantiate(ConstructorResolver.java:648) ~[spring-beans-5.3.30.jar!/:5.3.30]
+        ... 41 common frames omitted
+Caused by: java.lang.IllegalStateException: Cannot load driver class: com.mysql.jdbc.Driver
+        at org.springframework.util.Assert.state(Assert.java:97) ~[spring-core-5.3.30.jar!/:5.3.30]
+        at org.springframework.boot.autoconfigure.jdbc.DataSourceProperties.determineDriverClassName(DataSourceProperties.java:175) ~[spring-boot-autoconfigure-2.7.16.jar!/:2.7.16]
+        at org.springframework.boot.autoconfigure.jdbc.DataSourceProperties.initializeDataSourceBuilder(DataSourceProperties.java:125) ~[spring-boot-autoconfigure-2.7.16.jar!/:2.7.16]
+        at org.springframework.boot.autoconfigure.jdbc.DataSourceConfiguration.createDataSource(DataSourceConfiguration.java:48) ~[spring-boot-autoconfigure-2.7.16.jar!/:2.7.16]
+        at org.springframework.boot.autoconfigure.jdbc.DataSourceConfiguration$Hikari.dataSource(DataSourceConfiguration.java:90) ~[spring-boot-autoconfigure-2.7.16.jar!/:2.7.16]
+        at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[na:1.8.0_342]
+        at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62) ~[na:1.8.0_342]
+        at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[na:1.8.0_342]
+        at java.lang.reflect.Method.invoke(Method.java:498) ~[na:1.8.0_342]
+        at org.springframework.beans.factory.support.SimpleInstantiationStrategy.instantiate(SimpleInstantiationStrategy.java:154) ~[spring-beans-5.3.30.jar!/:5.3.30]
+        ... 42 common frames omitted
+
+[node1] (local) root@192.168.0.18 ~/docker_springapp
+$ 
